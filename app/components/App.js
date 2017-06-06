@@ -1,48 +1,24 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './Home';
+import Battle from './Battle';
 import Popular from './Popular';
-import PropTypes from 'prop-types';
+import Nav from './Nav';
 
-class SelectLanguage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const languages = ['All', 'Javascript', 'Ruby', 'Java', 'CSS', 'Python'];
-    return (
-      <ul className="languages">
-        { languages.map(lang => (
-          <li key={lang}
-              style={ lang === this.props.selectedLanguage ? {color: 'red'} : null }
-              onClick={() => this.props.onSelect(lang)}
-          >{lang}</li>
-        )) }
-      </ul>
-    );
-  }
-}
-
-SelectLanguage.propTypes = {
-  selectedLanguage: PropTypes.string.isRequired,
-  onSelect: PropTypes.func.isRequired
+const App = () => {
+  return (
+    <Router>
+      <div className='container'>
+        <Nav/>
+        <Switch>
+          <Route exact path='/' component={Home}/>
+          <Route exact path='/battle' component={Battle}/>
+          <Route path='/popular' component={Popular}/>
+          <Route render={() => <p>Not Found</p>}/>
+        </Switch>
+      </div>
+    </Router>
+  );
 };
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedLanguage: 'All'
-    };
-    this.updateLanguage = this.updateLanguage.bind(this)
-  }
-  updateLanguage(selectedLanguage) {
-    this.setState({ selectedLanguage });
-  }
-  render() {
-    return (
-      <SelectLanguage
-        selectedLanguage={this.state.selectedLanguage}
-        onSelect={this.updateLanguage}
-      />
-    );
-  }
-}
+export default App;
