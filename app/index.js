@@ -1,21 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import App from './components/App';
 
-// var React = require('react');
-// var ReactDOM = require('react-dom');
-// require('./index.css');
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        Hello world!
-      </div>
-    );
-  }
-}
-
-// export default App;
-const $app = document.getElementById('app');
-
-ReactDOM.render(<App/>, $app);
+ReactDOM.render(<App/>, document.getElementById('app'));
